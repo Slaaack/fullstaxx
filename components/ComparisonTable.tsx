@@ -7,18 +7,22 @@ interface Feature {
 interface ComparisonTableProps {
   toolA: string;
   toolB: string;
-  features: Feature[];
+  features?: Feature[];
+  data?: string; // JSON string fallback for MDX
 }
 
 function Cell({ value }: { value: string | boolean }) {
-  if (typeof value === "boolean") {
-    return value ? (
+  if (value === true || value === "true") {
+    return (
       <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-100">
         <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
         </svg>
       </span>
-    ) : (
+    );
+  }
+  if (value === false || value === "false") {
+    return (
       <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100">
         <svg className="w-4 h-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -26,10 +30,12 @@ function Cell({ value }: { value: string | boolean }) {
       </span>
     );
   }
-  return <span className="text-sm text-neutral-700">{value}</span>;
+  return <span className="text-sm text-neutral-700">{String(value)}</span>;
 }
 
-export default function ComparisonTable({ toolA, toolB, features = [] }: ComparisonTableProps) {
+export default function ComparisonTable({ toolA, toolB, features, data }: ComparisonTableProps) {
+  // Parse features from JSON string if passed via MDX data prop
+  const rows: Feature[] = features || (data ? JSON.parse(data) : []);
   return (
     <div className="overflow-x-auto rounded-xl border border-neutral-200 my-8">
       <table className="w-full text-sm border-collapse">
@@ -47,7 +53,7 @@ export default function ComparisonTable({ toolA, toolB, features = [] }: Compari
           </tr>
         </thead>
         <tbody>
-          {features.map((f, i) => (
+          {rows.map((f, i) => (
             <tr
               key={f.name}
               className={i % 2 === 0 ? "bg-white" : "bg-neutral-50/50"}
