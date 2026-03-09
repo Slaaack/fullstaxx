@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { getAllArticleSlugs, getArticleBySlug } from "@/lib/articles";
 import { formatDate, getCategoryColor, getSnapOGUrl } from "@/lib/utils";
 import AffiliateDisclaimer from "@/components/AffiliateDisclaimer";
@@ -147,7 +148,7 @@ export default function ArticlePage({
 
             {/* MDX content */}
             <div className="prose prose-neutral max-w-none">
-              <MDXRemote source={content} components={mdxComponents} />
+              <MDXRemote source={content} components={mdxComponents} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
             </div>
 
             {/* Affiliate links */}

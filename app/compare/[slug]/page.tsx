@@ -5,6 +5,7 @@ import AffiliateDisclaimer from "@/components/AffiliateDisclaimer";
 import AffiliateButton from "@/components/AffiliateButton";
 import ComparisonTable from "@/components/ComparisonTable";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 
 // Comparison pages re-use article slugs that start with the compare pattern
 // e.g. /compare/hubspot-vs-monday-com maps to an article slug
@@ -71,7 +72,7 @@ export default function ComparePage({ params }: { params: { slug: string } }) {
       )}
 
       <div className="prose prose-neutral max-w-none">
-        <MDXRemote source={content} components={mdxComponents} />
+        <MDXRemote source={content} components={mdxComponents} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
       </div>
 
       {frontmatter.affiliateLinks && frontmatter.affiliateLinks.length > 0 && (

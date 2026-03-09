@@ -5,6 +5,7 @@ import AffiliateDisclaimer from "@/components/AffiliateDisclaimer";
 import AffiliateButton from "@/components/AffiliateButton";
 import ComparisonTable from "@/components/ComparisonTable";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { getCategoryColor } from "@/lib/utils";
 
 export async function generateStaticParams() {
@@ -59,7 +60,7 @@ export default function BestPage({ params }: { params: { slug: string } }) {
       )}
 
       <div className="prose prose-neutral max-w-none">
-        <MDXRemote source={content} components={mdxComponents} />
+        <MDXRemote source={content} components={mdxComponents} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
       </div>
 
       {frontmatter.affiliateLinks && frontmatter.affiliateLinks.length > 0 && (
