@@ -27,6 +27,6 @@ export function getCategoryColor(category: string): string {
 
 export function getSnapOGUrl(title: string, description?: string): string {
   const params = new URLSearchParams({ title });
-  if (description) params.set("description", description);
-  return `https://i.snapog.com/?${params.toString()}`;
+  if (description) params.set("subtitle", description);
+  return `https://snapog.vercel.app/api/og?${params.toString()}`;
 }

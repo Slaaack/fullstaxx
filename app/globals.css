@@ -27,13 +27,45 @@ body {
   border-radius: 0.5rem;
 }
 
+/* Table styles */
 .prose table {
   font-size: 0.875rem;
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 1px solid #E7E5E4;
+}
+
+.prose thead {
+  background-color: #F5F5F4;
 }
 
 .prose th {
   background-color: #F5F5F4;
   font-weight: 600;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid #E7E5E4;
+  color: #1C1917;
+}
+
+.prose td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid #E7E5E4;
+  vertical-align: middle;
+}
+
+.prose tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.prose tbody tr:nth-child(even) {
+  background-color: #FAFAF9;
+}
+
+.prose tbody tr:hover {
+  background-color: #FFF7ED;
 }
 
 /* TOC active state */

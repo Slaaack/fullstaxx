@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import { Article } from "@/lib/articles";
-import { formatDate, getCategoryColor } from "@/lib/utils";
+import { formatDate, getCategoryColor, getSnapOGUrl } from "@/lib/utils";
 
 interface ArticleCardProps {
   article: Article;
@@ -8,20 +11,31 @@ interface ArticleCardProps {
 
 export default function ArticleCard({ article }: ArticleCardProps) {
   const { slug, frontmatter } = article;
-  const ogImage = `https://i.snapog.com/?title=${encodeURIComponent(frontmatter.title)}&description=${encodeURIComponent(frontmatter.description)}`;
+  const ogImage = getSnapOGUrl(frontmatter.title, frontmatter.description);
+  const [imgFailed, setImgFailed] = useState(false);
 
   return (
     <Link href={`/articles/${slug}`} className="group block">
       <article className="bg-white rounded-xl border border-neutral-200 overflow-hidden hover:shadow-md hover:border-orange-200 transition-all duration-200">
         {/* Thumbnail */}
-        <div className="aspect-[16/9] bg-neutral-100 overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={ogImage}
-            alt={frontmatter.title}
-            className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
-            loading="lazy"
-          />
+        <div className="aspect-[16/9] bg-neutral-100 overflow-hidden relative">
+          {imgFailed ? (
+            /* Gradient fallback */
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-400 via-orange-500 to-amber-600 p-5">
+              <span className="text-white font-semibold text-center text-sm leading-snug line-clamp-3 drop-shadow">
+                {frontmatter.title}
+              </span>
+            </div>
+          ) : (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={ogImage}
+              alt={frontmatter.title}
+              className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+              loading="lazy"
+              onError={() => setImgFailed(true)}
+            />
+          )}
         </div>
 
         {/* Content */}

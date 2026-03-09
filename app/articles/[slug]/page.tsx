@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllArticleSlugs, getArticleBySlug } from "@/lib/articles";
-import { formatDate, getCategoryColor } from "@/lib/utils";
+import { formatDate, getCategoryColor, getSnapOGUrl } from "@/lib/utils";
 import AffiliateDisclaimer from "@/components/AffiliateDisclaimer";
 import AffiliateButton from "@/components/AffiliateButton";
 import TableOfContents from "@/components/TableOfContents";
@@ -23,7 +23,7 @@ export async function generateMetadata({
   if (!article) return {};
 
   const { frontmatter } = article;
-  const ogImage = `https://i.snapog.com/?title=${encodeURIComponent(frontmatter.title)}&description=${encodeURIComponent(frontmatter.description)}`;
+  const ogImage = getSnapOGUrl(frontmatter.title, frontmatter.description);
 
   return {
     title: frontmatter.title,
