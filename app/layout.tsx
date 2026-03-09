@@ -14,6 +14,12 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://fullstaxx.com"),
+  verification: {
+    google: "ca-pub-3690416421391040",
+  },
+  other: {
+    "google-adsense-account": "ca-pub-3690416421391040",
+  },
   title: {
     default: "Fullstaxx — Find the best tools for your business",
     template: "%s | Fullstaxx",
