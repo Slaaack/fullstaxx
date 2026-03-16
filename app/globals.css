@@ -68,6 +68,18 @@ body {
   background-color: #FFF7ED;
 }
 
+/* Make tables scroll horizontally on mobile */
+.prose :where(table) {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.prose :where(td, th) {
+  white-space: normal;
+  min-width: 100px;
+}
+
 /* TOC active state */
 .toc-link-active {
   color: #f97316;

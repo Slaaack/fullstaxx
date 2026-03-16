@@ -169,11 +169,13 @@ export default function ArticlePage({
           </article>
 
           {/* TOC Sidebar */}
-          <div className="w-64 flex-shrink-0">
+          <div className="hidden lg:block w-64 flex-shrink-0">
             <TableOfContents content={content} />
           </div>
         </div>
       </div>
     </>
   );
+}
+
 }
