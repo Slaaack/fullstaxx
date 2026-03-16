@@ -114,13 +114,13 @@ export default function ArticlePage({
               >
                 {frontmatter.category}
               </span>
-              <h1 className="text-3xl sm:text-4xl font-bold text-neutral-900 leading-tight mb-4">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900 leading-tight mb-4">
                 {frontmatter.title}
               </h1>
-              <p className="text-lg text-neutral-500 leading-relaxed mb-5">
+              <p className="text-base sm:text-lg text-neutral-500 leading-relaxed mb-5">
                 {frontmatter.description}
               </p>
-              <div className="flex items-center gap-4 text-sm text-neutral-400 pb-5 border-b border-neutral-200">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-sm text-neutral-400 pb-5 border-b border-neutral-200">
                 <span>By {frontmatter.author}</span>
                 <span>·</span>
                 <time dateTime={frontmatter.date}>{formatDate(frontmatter.date)}</time>
@@ -176,6 +176,4 @@ export default function ArticlePage({
       </div>
     </>
   );
-}
-
 }
